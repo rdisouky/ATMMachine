@@ -1,5 +1,5 @@
 const ATMDeposit = ({ onChange, isDeposit, isValid }) => {
-  const choice = ['Deposit', 'Cash Back'];
+  const choice = ['Deposit', 'Cash Back', 'eTransfer'];
   console.log(`ATM isDeposit: ${isDeposit}`);
   return (
     <label className="label huge">
@@ -27,6 +27,12 @@ const Account = () => {
       return setValidTransaction (false);
     }
     if (atmMode === 'Cash Back' && Number (event.target.value) > totalState) {
+      setValidTransaction (false);
+     } else {
+      setValidTransaction (true);  
+      }
+    setDeposit(Number(event.target.value));
+    if (atmMode === 'eTransfer' && Number (event.target.value) > totalState) {
       setValidTransaction (false);
      } else {
       setValidTransaction (true);  
@@ -62,6 +68,7 @@ return (
 <option id="no-selection" value=""></option>
 <option id="deposit-selection" value="Deposit">Deposit</option>
 <option id="cashback-selection" value="Cash Back">Cash Back</option>
+<option id="etransfer-selection" value="eTransfer">eTransfer</option>
 </select>
 {atmMode && (
           <ATMDeposit
